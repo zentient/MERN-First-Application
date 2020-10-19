@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import axios from "axios";
+
+// Port
+const port = process.env.PORT || 2200;
 
 export default class CreateUser extends Component {
   constructor(props) {
@@ -24,6 +28,12 @@ export default class CreateUser extends Component {
       username: this.state.username,
     };
     console.log(newUser);
+
+    axios
+      .post(`http://localhost:${port}/users/add`, newUser)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+      
     this.setState({
       username: "",
     });
