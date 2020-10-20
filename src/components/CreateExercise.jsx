@@ -27,15 +27,14 @@ export default class CreateExercise extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:${port}/users/`)
-      .then((res) => {
-        if(res.data.length > 0) {
-          this.setState({
-            users: res.data.map((user) => user.username),
-            username: res.data[0].username
-          })
-        } 
-      })
+    axios.get(`http://localhost:${port}/users/`).then((res) => {
+      if (res.data.length > 0) {
+        this.setState({
+          users: res.data.map((user) => user.username),
+          username: res.data[0].username,
+        });
+      }
+    });
   }
 
   onChangeUsername(e) {
@@ -71,9 +70,10 @@ export default class CreateExercise extends Component {
       date: this.state.date,
     };
 
-    axios.post(`http://localhost:${port}/exercises/add`, newExercise)
-    .then((res) => console.log(res.data))
-    .catch((err) => console.log(err))
+    axios
+      .post(`http://localhost:${port}/exercises/add`, newExercise)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
 
     window.location = "/";
     console.log(newExercise);
